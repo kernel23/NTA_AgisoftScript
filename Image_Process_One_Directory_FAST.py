@@ -1,8 +1,7 @@
 #Hope this loops in your project folder
 import Metashape
 import os, sys, time
-import glob 
-from send2trash import send2trash
+import glob
 import shutil
 
 # Checking compatibility
