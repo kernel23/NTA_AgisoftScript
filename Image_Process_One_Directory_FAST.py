@@ -61,9 +61,12 @@ for dir_with_jpg in dirs_with_jpg:
     if chunk.orthomosaic:
         orthomosaic_path = os.path.join(output_folder, dir_name + '_ortho.tif')
         chunk.exportRaster(orthomosaic_path, source_data=Metashape.OrthomosaicData, resolution =0.05 )
+	
+	kmz_path = os.path.join(output_folder, dir_name + '-ortho.kmz')
+    	chunk.exportRaster(kmz_path, source_data=Metashape.ElevationData, format=Metashape.RasterFormatKMZ, projection=chunk.crs)
 
         # Delete the directory folder of the finished orthomosaic
-        shutil.rmtree(dir_with_jpg)
+        #shutil.rmtree(dir_with_jpg)
 
 
 print('Processing finished, results saved to '+ output_folder + '.')
