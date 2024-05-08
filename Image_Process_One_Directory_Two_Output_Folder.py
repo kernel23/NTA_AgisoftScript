@@ -64,7 +64,7 @@ for dir_with_jpg in dirs_with_jpg:
         orthomosaic_path = os.path.join(output_TIF, dir_name + '_ortho.tif')
         chunk.exportRaster(orthomosaic_path, source_data=Metashape.OrthomosaicData, resolution =0.05 )
 	
-	      kmz_path = os.path.join(output_KMZ, dir_name + '_ortho.kmz')
+	kmz_path = os.path.join(output_KMZ, dir_name + '_ortho.kmz')
         chunk.exportRaster(kmz_path, format = Metashape.RasterFormatKMZ,  description = 'Generated through automated python script')
 
         # Delete the directory folder of the finished orthomosaic
