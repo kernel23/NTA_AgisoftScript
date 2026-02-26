@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metashape Batch Processing Guide</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .infographic-container {
+            max-width: 800px;
+            margin: 40px 20px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.2em;
+            letter-spacing: 1px;
+        }
+
+        .header p {
+            margin-top: 10px;
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 40px 20px;
+        }
+
+        /* The vertical line */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            bottom: 40px;
+            left: 50px;
+            width: 4px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .step {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 100px;
+            padding-right: 20px;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        /* The step number circle */
+        .step-number {
+            position: absolute;
+            left: 28px;
+            top: 0;
+            width: 48px;
+            height: 48px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.4);
+            border: 4px solid var(--card-bg);
+            z-index: 2;
+        }
+
+        .step-content {
+            background: var(--bg-color);
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .step-content h2 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-content ul {
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+
+        .step-content li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .note-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 40px 40px 100px;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+
+        @media (max-width: 600px) {
+            .timeline::before { left: 30px; }
+            .step { padding-left: 70px; }
+            .step-number { left: 10px; width: 40px; height: 40px; font-size: 1.2em; }
+            .note-box { margin-left: 70px; margin-right: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="infographic-container">
+        
+        <div class="header">
+            <h1>Automated Orthomosaic Workflow</h1>
+            <p>Batch Process JPG Folders to TIF & KMZ in Agisoft Metashape</p>
+        </div>
+
+        <div class="timeline">
+            
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h2>📁 Prepare Your Folders</h2>
+                    <p>Before touching the software, ensure your files are organized into three specific locations on your computer:</p>
+                    <ul>
+                        <li><span class="highlight">Root Directory:</span> The main folder containing all your individual subfolders of JPG images.</li>
+                        <li><span class="highlight">Output Directory:</span> Where the script will save the final generated TIF and KMZ maps.</li>
+                        <li><span class="highlight">Move Directory:</span> The archive folder where processed image subfolders will be relocated once finished.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h2>⚙️ Run the Script in Metashape</h2>
+                    <p>Launch <strong>Agisoft Metashape Professional (v2.1)</strong> and trigger the script:</p>
+                    <ul>
+                        <li>Click on <strong>Tools</strong> in the top menu bar.</li>
+                        <li>Navigate to <strong>Scripts</strong> and select <strong>Run Script...</strong></li>
+                        <li>Click the folder icon, locate your saved <code>.py</code> script file, and click <strong>OK</strong>.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h2>🖱️ Follow the Pop-Up Prompts</h2>
+                    <p>The script will immediately display three file explorer windows in a row. Select the directories you prepared in Step 1:</p>
+                    <ul>
+                        <li><strong>Prompt 1:</strong> Select the <span class="highlight">Root</span> directory.</li>
+                        <li><strong>Prompt 2:</strong> Select the <span class="highlight">Output</span> directory.</li>
+                        <li><strong>Prompt 3:</strong> Select the <span class="highlight">Move</span> directory.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h2>🚀 Auto-Processing & Completion</h2>
+                    <p>After selecting the final folder, the script takes over! For each folder, it will automatically:</p>
+                    <ul>
+                        <li>Align cameras, build a DEM, and generate an Orthomosaic.</li>
+                        <li>Export the <code>.tif</code> and <code>.kmz</code> files to your Output folder.</li>
+                        <li>Move the original images to your Move folder.</li>
+                        <li>Clean up temporary project files to save space.</li>
+                    </ul>
+                    <p>When everything is finished, a final <strong>pop-up box</strong> will appear telling you exactly how many folders were successfully processed!</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="note-box">
+            <strong>⚠️ Important Note:</strong> Keep an eye on the Metashape <em>Console pane</em> at the bottom of your screen to monitor the script's progress in real-time.
+        </div>
+
+    </div>
+
+</body>
+</html>
